@@ -28,6 +28,7 @@ const SubscribeOverlay = ({ data, overlay }) => {
     const openingStyle = { opacity: 1, pointerEvents: `auto` }
     const closingStyle = { opacity: 0, pointerEvents: null }
     message += ' netlify';
+    // TODO: Make this a config option instead
 
     return (
         <div className="subscribe-overlay" style={ isOpen ? openingStyle : closingStyle } >
