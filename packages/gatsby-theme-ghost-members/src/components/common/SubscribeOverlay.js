@@ -23,9 +23,11 @@ const SubscribeOverlay = ({ data, overlay }) => {
     const site = data.ghostSettings
     const siteLogo = site.logoSharp && site.logoSharp.publicURL || site.logo
     const title = text(`SITE_TITLE`, site.title)
-    const { isOpen, value, message } = overlay.state
+    const { state: { isOpen, value } } = overlay;
+    let { state: { message } } = overlay;
     const openingStyle = { opacity: 1, pointerEvents: `auto` }
     const closingStyle = { opacity: 0, pointerEvents: null }
+    message += ' netlify';
 
     return (
         <div className="subscribe-overlay" style={ isOpen ? openingStyle : closingStyle } >
@@ -38,7 +40,7 @@ const SubscribeOverlay = ({ data, overlay }) => {
                 <div className="subscribe-form">
                     <h1 className="subscribe-overlay-title">{text(`SUBSCRIBE_TO`)} {title}</h1>
                     <p className="subscribe-overlay-description">{text(`SUBSCRIBE_OVERLAY`)}</p>
-                    <form className={message} data-members-form="subscribe" onSubmit={overlay.handleSubmit}>
+                    <form className={this.state.message} data-members-form="subscribe" onSubmit={overlay.handleSubmit}>
                         <div className="form-group">
                             <HiddenLabel htmlFor="email">{text(`EMAIL`)}</HiddenLabel>
                             <input id="email" name="email" type="email" value={value}
